@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
 export default function ReservationForm() {
     const [name, setName] = useState("");
@@ -10,6 +10,7 @@ export default function ReservationForm() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        // control de errores
         if (name.trim() === "") {
             setError("Por favor, ingresa tu nombre.");
             return;
@@ -20,6 +21,10 @@ export default function ReservationForm() {
         }
         if (date.trim() === "") {
             setError("Por favor, selecciona una fecha y hora.");
+            return;
+        }
+        if (new Date(date) < new Date()) {
+            setError("La fecha y hora debe ser mayor a la actual.");
             return;
         }
 
